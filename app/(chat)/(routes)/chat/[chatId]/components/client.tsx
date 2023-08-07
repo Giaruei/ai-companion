@@ -2,7 +2,7 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-04 11:32:47
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-04 21:45:56
+ * @LastEditTime: 2023-08-07 14:49:53
  * @FilePath: \ai-companion\app\(chat)\(routes)\chat\[chatId]\components\client.tsx
  * @Description:
  */
@@ -40,8 +40,10 @@ export const ChatClient = ({ companion }: ChatClientProps) => {
 					role: "system",
 					content: completion,
 				};
+
 				setMessages((current) => [...current, systemMessage]);
 				setInput("");
+
 				router.refresh();
 			},
 		});
@@ -51,9 +53,12 @@ export const ChatClient = ({ companion }: ChatClientProps) => {
 			role: "user",
 			content: input,
 		};
+
 		setMessages((current) => [...current, userMessage]);
+
 		handleSubmit(e);
 	};
+
 	return (
 		<div className="flex flex-col h-screen p-4 space-y-2">
 			<ChatHeader companion={companion} />
@@ -63,10 +68,10 @@ export const ChatClient = ({ companion }: ChatClientProps) => {
 				messages={messages}
 			/>
 			<ChatForm
+				isLoading={isLoading}
 				input={input}
 				handleInputChange={handleInputChange}
 				onSubmit={onSubmit}
-				isLoading={isLoading}
 			/>
 		</div>
 	);
