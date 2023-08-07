@@ -2,7 +2,7 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-06 18:42:10
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-06 19:40:15
+ * @LastEditTime: 2023-08-07 14:18:11
  * @FilePath: \ai-companion\app\api\webhook\route.ts
  * @Description:
  */
@@ -14,7 +14,7 @@ import prismadb from "@/lib/prismadb";
 
 export async function POST(req: Request) {
 	const body = await req.text();
-	const signature = headers().get("Stripe-Signatrue") as string;
+	const signature = headers().get("Stripe-Signature") as string;
 
 	let event: Stripe.Event;
 
