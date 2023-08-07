@@ -2,7 +2,7 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-01 19:43:05
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-07 13:26:46
+ * @LastEditTime: 2023-08-07 14:03:05
  * @FilePath: \ai-companion\components\navbar.tsx
  * @Description:
  */
@@ -29,10 +29,11 @@ interface NavbarProps {
 
 export const Navbar = ({ isPro }: NavbarProps) => {
 	const proModal = useProModal();
+
 	return (
 		<div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary h-16">
 			<div className="flex items-center">
-				<MobileSidebar />
+				<MobileSidebar isPro={isPro} />
 				<Link href="/">
 					<h1
 						className={cn(
