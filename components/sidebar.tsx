@@ -2,18 +2,26 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-02 13:34:40
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-02 13:49:17
+ * @LastEditTime: 2023-08-07 13:31:17
  * @FilePath: \ai-companion\components\sidebar.tsx
  * @Description:
  */
 "use client";
 
+import { useProModal } from "@/hooks/use-pro-modal";
 import { cn } from "@/lib/utils";
 import { Home, Plus, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-export const Sidebar = () => {
+
+interface SidebarProps {
+	isPro: boolean;
+}
+
+export const Sidebar = ({ isPro }: SidebarProps) => {
 	const pathname = usePathname();
 	const router = useRouter();
+	const proModal = useProModal();
+
 	const routes = [
 		{
 			icon: Home,
@@ -36,8 +44,12 @@ export const Sidebar = () => {
 	];
 
 	const onNavigate = (url: string, pro: boolean) => {
+		if (pro && !isPro) {
+			return proModal.onOpen()
+		}
 		return router.push(url);
 	};
+
 	return (
 		<div className="space-y-4 flex flex-col h-full text-primary bg-secondary">
 			<div className="p-3 flex flex-1 justify-center">

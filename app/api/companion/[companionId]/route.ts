@@ -2,11 +2,12 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-03 14:44:42
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-04 13:16:08
+ * @LastEditTime: 2023-08-07 13:33:37
  * @FilePath: \ai-companion\app\api\companion\[companionId]\route.ts
  * @Description:
  */
 import prismadb from "@/lib/prismadb";
+import { checkSubscription } from "@/lib/subscription";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -36,12 +37,16 @@ export async function PATCH(
 		) {
 			return new NextResponse("Missing required fields", { status: 400 });
 		}
-		// check for subscription
+
+		const isPro = await checkSubscription();
+		if (!isPro) {
+			return new NextResponse("Pro subscription required", { status: 403 });
+		}
 
 		const companion = await prismadb.companion.update({
 			where: {
 				id: params.companionId,
-				userId: user.id
+				userId: user.id,
 			},
 			data: {
 				categoryId,

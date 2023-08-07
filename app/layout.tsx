@@ -2,7 +2,7 @@
  * @Author: 前端天才蔡嘉睿
  * @Date: 2023-08-01 13:58:16
  * @LastEditors: Giaruei 247658354@qq.com
- * @LastEditTime: 2023-08-04 14:25:28
+ * @LastEditTime: 2023-08-06 20:36:55
  * @FilePath: \ai-companion\app\layout.tsx
  * @Description:
  */
@@ -13,6 +13,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import { ProModal } from "@/components/pro-modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
 			<html lang="en" suppressHydrationWarning>
 				<body className={cn("bg-secondary", inter.className)}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+						<ProModal />
 						{children}
 						<Toaster />
 					</ThemeProvider>
